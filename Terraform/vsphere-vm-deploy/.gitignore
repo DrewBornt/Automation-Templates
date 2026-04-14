@@ -1,0 +1,20 @@
+# Terraform state — contains live infrastructure details, never commit
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+terraform.tfstate.d/
+
+# Variable files with credentials
+# terraform.tfvars # uncomment for production/live use
+*.auto.tfvars
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Override files (local experiments, not for sharing)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
