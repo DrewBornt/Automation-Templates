@@ -1,0 +1,48 @@
+---
+- name: Deploy VMs from template in vCenter
+  hosts: localhost
+  gather_facts: false
+
+  vars_files:
+    - vars.yml
+
+  tasks:
+
+    - name: Clone template and apply customization for each VM
+      community.vmware.vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: false
+
+        datacenter: "{{ datacenter }}"
+        cluster:    "{{ cluster }}"
+        datastore:  "{{ datastore }}"
+        folder:     "{{ vm_folder }}"
+
+        template: "{{ template_name }}"
+
+        name:  "{{ item.name }}"
+        state: poweredon
+
+        hardware:
+          num_cpus:  "{{ item.num_cpus }}"
+          memory_mb: "{{ item.memory_mb }}"
+
+        customization:
+          hostname:    "{{ item.hostname }}"
+          domain:      "{{ item.domain    | default(default_domain) }}"
+          dns_servers: "{{ item.dns_servers | default(default_dns_servers) }}"
+
+        networks:
+          - name:    "{{ item.network }}"
+            ip:      "{{ item.ip_address }}"
+            netmask: "{{ item.netmask  | default(default_netmask) }}"
+            gateway: "{{ item.gateway  | default(default_gateway) }}"
+            type:    static
+
+        wait_for_ip_address: true
+
+      loop: "{{ vms }}"
+      loop_control:
+        label: "{{ item.name }}"

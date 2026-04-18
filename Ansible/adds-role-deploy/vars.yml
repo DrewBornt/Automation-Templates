@@ -1,0 +1,7 @@
+---
+# ─── New domain details ───────────────────────────────────
+domain_name:       "Your-Domain-FQDN-Here"        # e.g. corp.example.com
+netbios_name:      "Your-NetBIOS-Name-Here"        # e.g. CORP  (short name, no dots)
+
+# Safe Mode Administrator Password — needed to boot into AD recovery mode
+safe_mode_password: "Your-SafeMode-Password-Here"

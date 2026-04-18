@@ -1,0 +1,8 @@
+all:
+  hosts:
+    Your-Server-Hostname-Or-IP-Here:
+      ansible_user:     "Your-Windows-Admin-Username-Here"
+      ansible_password: "Your-Windows-Admin-Password-Here"
+      ansible_connection: winrm
+      ansible_winrm_transport: ntlm
+      ansible_winrm_server_cert_validation: ignore

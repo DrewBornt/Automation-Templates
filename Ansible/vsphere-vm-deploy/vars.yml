@@ -1,0 +1,63 @@
+---
+# ─── vCenter connection ───────────────────────────────────
+vcenter_hostname: "Your-vCenter-Hostname-Or-IP-Here"
+vcenter_username: "Your-vCenter-Username-Here"    # e.g. administrator@vsphere.local
+vcenter_password: "Your-vCenter-Password-Here"
+
+# ─── vCenter inventory ────────────────────────────────────
+datacenter:    "Your-Datacenter-Name-Here"
+cluster:       "Your-Cluster-Or-Host-Name-Here"
+datastore:     "Your-Datastore-Name-Here"
+vm_folder:     "Your-VM-Folder-Path-Here"         # e.g. /Datacenter/vm/Production
+
+# ─── Template ─────────────────────────────────────────────
+template_name: "Your-Template-Name-Here"
+
+# ─── Network defaults ─────────────────────────────────────
+# These apply to any VM that does not set its own value.
+# If all VMs are on the same network, just fill these in and
+# omit the per-VM overrides below.
+default_domain:      "Your-Domain-Here"           # e.g. corp.example.com
+default_gateway:     "Your-Default-Gateway-Here"  # e.g. 192.168.1.1
+default_netmask:     "Your-Subnet-Mask-Here"      # e.g. 255.255.255.0
+default_dns_servers:
+  - "Your-Primary-DNS-Here"
+  - "Your-Secondary-DNS-Here"
+
+# ─── VMs to deploy ────────────────────────────────────────
+# Required per VM : name, hostname, ip_address, network, num_cpus, memory_mb
+# Optional per VM : gateway, netmask, domain, dns_servers
+#                   (omit any of these to fall back to the defaults above)
+vms:
+
+  # Example — uses all network defaults
+  - name:       "Your-VM-Display-Name-Here"
+    hostname:   "Your-Hostname-Here"
+    ip_address: "Your-Static-IP-Here"
+    network:    "Your-Port-Group-Name-Here"
+    num_cpus:   2
+    memory_mb:  4096
+
+  # Example — on a different port group with its own gateway and netmask
+  - name:       "Your-Second-VM-Display-Name-Here"
+    hostname:   "Your-Second-Hostname-Here"
+    ip_address: "Your-Second-Static-IP-Here"
+    network:    "Your-Second-Port-Group-Name-Here"
+    gateway:    "Your-Second-Gateway-Here"
+    netmask:    "Your-Second-Subnet-Mask-Here"
+    num_cpus:   4
+    memory_mb:  8192
+
+  # Example — everything overridden (different network, domain, and DNS)
+  - name:       "Your-Third-VM-Display-Name-Here"
+    hostname:   "Your-Third-Hostname-Here"
+    ip_address: "Your-Third-Static-IP-Here"
+    network:    "Your-Third-Port-Group-Name-Here"
+    gateway:    "Your-Third-Gateway-Here"
+    netmask:    "Your-Third-Subnet-Mask-Here"
+    domain:     "Your-Third-Domain-Here"
+    dns_servers:
+      - "Your-Third-Primary-DNS-Here"
+      - "Your-Third-Secondary-DNS-Here"
+    num_cpus:   2
+    memory_mb:  2048

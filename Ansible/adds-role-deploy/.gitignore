@@ -1,0 +1,2 @@
+inventory.yml  # Contains credentials — do not commit
+vars.yml       # Contains credentials — do not commit
